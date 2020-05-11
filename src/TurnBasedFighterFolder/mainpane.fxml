@@ -1,0 +1,599 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu id="fileMenu" mnemonicParsing="false" text="File">
+               <items>
+                  <MenuItem fx:id="newFileItem" mnemonicParsing="false" text="New..." />
+                  <MenuItem fx:id="openFileItem" mnemonicParsing="false" text="Open..." />
+                  <MenuItem fx:id="saveFileItem" mnemonicParsing="false" text="Save" />
+                  <MenuItem fx:id="saveAsFileItem" mnemonicParsing="false" text="Save As..." />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <Menu fx:id="preferencesMenu" mnemonicParsing="false" text="Preferences">
+                     <items>
+                        <Menu fx:id="themesMenu" mnemonicParsing="false" text="Themes">
+                           <items>
+                              <RadioMenuItem fx:id="lightThemeBox" mnemonicParsing="false" selected="true" text="Light Theme">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="themeToggleGroup" />
+                                 </toggleGroup>
+                              </RadioMenuItem>
+                              <RadioMenuItem fx:id="darkThemeBox" mnemonicParsing="false" text="Dark Theme" toggleGroup="$themeToggleGroup" />
+                           </items>
+                        </Menu>
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem fx:id="saveConfigItem" mnemonicParsing="false" text="Save Configuration" />
+                     </items>
+                  </Menu>
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem fx:id="exitMenu" mnemonicParsing="false" text="Exit" />
+               </items>
+          </Menu>
+          <Menu fx:id="editMenu" mnemonicParsing="false" text="Edit">
+               <items>
+                  <MenuItem fx:id="cutMenuItem" mnemonicParsing="false" text="Cut (Ctrl+X)" />
+                  <MenuItem fx:id="copyMenuItem" mnemonicParsing="false" text="Copy (Ctrl+C)" />
+                  <MenuItem fx:id="pasteMenuItem" disable="true" mnemonicParsing="false" text="Paste (Ctrl+V)" />
+               </items></Menu>
+          <Menu id="helpMenu" mnemonicParsing="false" text="Help">
+               <items>
+                  <MenuItem fx:id="abtMenuItem" mnemonicParsing="false" text="About" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem fx:id="creditsMenuItem" mnemonicParsing="false" text="Credits" />
+               </items></Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab closable="false" text="Rules And Levels">
+               <content>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <left>
+                        <AnchorPane prefHeight="836.0" prefWidth="274.0" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </BorderPane.margin>
+                           <children>
+                              <CheckBox mnemonicParsing="false" text="Use Level List?" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="10.0" />
+                              <Label layoutX="14.0" layoutY="39.0" text="Use the value &quot;0&quot; to represent the last level!" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="40.0" />
+                              <TableView fx:id="lvlList" layoutX="47.0" layoutY="65.0" prefHeight="497.0" prefWidth="164.0">
+                                 <columns>
+                                    <TableColumn fx:id="levelColumn" prefWidth="75.0" resizable="false" text="Level" />
+                                    <TableColumn fx:id="experienceColumn" prefWidth="75.0" resizable="false" text="Experience" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </AnchorPane>
+                     </left>
+                     <center>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <top>
+                              <ListView prefHeight="537.0" prefWidth="586.0" BorderPane.alignment="CENTER">
+                                 <BorderPane.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </BorderPane.margin>
+                              </ListView>
+                           </top>
+                           <center>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Button mnemonicParsing="false" text="Add Rules" AnchorPane.leftAnchor="175.0" AnchorPane.topAnchor="0.0" />
+                                    <Button layoutY="2.0" mnemonicParsing="false" text="Edit Rule" AnchorPane.leftAnchor="260.0" AnchorPane.topAnchor="0.0" />
+                                    <Button layoutY="2.0" mnemonicParsing="false" text="Delete Rule" AnchorPane.leftAnchor="335.0" AnchorPane.topAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
+                           </center>
+                           <opaqueInsets>
+                              <Insets right="10.0" />
+                           </opaqueInsets>
+                        </BorderPane>
+                     </center>
+                     <bottom>
+                        <BorderPane prefHeight="232.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </BorderPane.margin>
+                           <left>
+                              <TextArea fx:id="commandBox" editable="false" prefHeight="232.0" prefWidth="753.0" wrapText="true" BorderPane.alignment="CENTER" />
+                           </left>
+                           <center>
+                              <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Button fx:id="gemerateCommandText" mnemonicParsing="false" prefHeight="33.0" prefWidth="123.0" text="Generate Command" />
+                                    <Button fx:id="copyCommandText1" layoutX="13.0" layoutY="13.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="123.0" text="Copy Command" />
+                                 </children>
+                                 <padding>
+                                    <Insets left="3.0" top="3.0" />
+                                 </padding>
+                              </VBox>
+                           </center>
+                        </BorderPane>
+                     </bottom>
+                  </BorderPane>
+               </content>
+          </Tab>
+            <Tab closable="false" text="Effects/Conditions">
+               <content>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <top>
+                        <AnchorPane prefHeight="586.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <ListView fx:id="effectCondListView" layoutX="30.0" layoutY="26.0" prefHeight="496.0" prefWidth="839.0" />
+                              <Button fx:id="addEffectCond" layoutX="156.0" layoutY="540.0" mnemonicParsing="false" text="Add Effect/Condition" AnchorPane.leftAnchor="230.0" />
+                              <Button fx:id="editEffectCond" layoutX="387.0" layoutY="540.0" mnemonicParsing="false" text="Edit Effect/Condition" />
+                              <Button fx:id="delEffectCond" layoutX="705.0" layoutY="540.0" mnemonicParsing="false" text="Delete Effect/Condition" AnchorPane.rightAnchor="222.0" />
+                           </children>
+                        </AnchorPane>
+                     </top>
+                     <center>
+                        <AnchorPane prefHeight="323.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <TextField fx:id="effectCondName" layoutX="14.0" layoutY="14.0" promptText="Effect/Condition Name" />
+                              <Label layoutX="163.0" layoutY="17.0" text=": A ">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <ChoiceBox fx:id="effectCondPhysMag" layoutX="189.0" layoutY="15.0" prefHeight="25.0" prefWidth="131.0" />
+                              <Label layoutX="327.0" layoutY="18.0" text="effect that targets the ">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <ChoiceBox fx:id="effectTargets" layoutX="465.0" layoutY="16.0" prefWidth="150.0" />
+                              <Label layoutX="623.0" layoutY="17.0" text="and lasts ">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="effectDiceNum" layoutX="682.0" layoutY="16.0" prefHeight="25.0" prefWidth="24.0" promptText="1" />
+                              <Label layoutX="713.0" layoutY="17.0" text=" d  ">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <ComboBox fx:id="effectDiceType" layoutX="733.0" layoutY="16.0" prefHeight="25.0" prefWidth="49.0" />
+                              <CheckBox fx:id="effectStacks" layoutX="14.0" layoutY="185.0" mnemonicParsing="false" text="Stacks?" />
+                              <CheckBox fx:id="looseTurn" layoutX="14.0" layoutY="210.0" mnemonicParsing="false" text="Loose a turn?" />
+                           </children>
+                        </AnchorPane>
+                     </center>
+                  </BorderPane>
+               </content>
+            </Tab>
+          <Tab closable="false" text="Combat">
+               <content>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <left>
+                        <GridPane prefHeight="846.0" prefWidth="425.0" BorderPane.alignment="CENTER">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Label layoutX="10.0" layoutY="33.0" prefHeight="17.0" prefWidth="151.0" text="All rolls to hit are based on:" />
+                                    <RadioButton fx:id="rollToHitDice" layoutX="14.0" layoutY="62.0" mnemonicParsing="false" selected="true" text="d ">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="rollToHitToggleGroup" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <ChoiceBox fx:id="rollToHitDiceVal" layoutX="46.0" layoutY="58.0" prefHeight="25.0" prefWidth="54.0" />
+                                    <RadioButton fx:id="rollToHitClass" layoutX="14.0" layoutY="93.0" mnemonicParsing="false" text="Class" toggleGroup="$rollToHitToggleGroup" />
+                                    <RadioButton fx:id="rollToHitRace" layoutX="14.0" layoutY="123.0" mnemonicParsing="false" text="Race" toggleGroup="$rollToHitToggleGroup" />
+                                    <Label layoutX="10.0" layoutY="156.0" text="All rolls for damage are based on:" />
+                                    <RadioButton fx:id="rollDamageDice" layoutX="14.0" layoutY="186.0" mnemonicParsing="false" selected="true" text="d ">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="rollDamageToggleGroup" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <ChoiceBox fx:id="rollDamageDiceVal" layoutX="46.0" layoutY="182.0" prefHeight="25.0" prefWidth="54.0" />
+                                    <RadioButton fx:id="rollDamageClass" layoutX="14.0" layoutY="219.0" mnemonicParsing="false" text="Class" toggleGroup="$rollDamageToggleGroup" />
+                                    <RadioButton fx:id="rollDamageRace" layoutX="14.0" layoutY="252.0" mnemonicParsing="false" text="Race" toggleGroup="$rollDamageToggleGroup" />
+                                    <CheckBox fx:id="bountyRules" layoutX="9.0" layoutY="6.0" mnemonicParsing="false" text="Bounty Rules" />
+                                    <Label layoutX="8.0" layoutY="275.0" prefHeight="39.0" prefWidth="182.0" text="All successful roles to hit are based on:" wrapText="true" />
+                                    <RadioButton fx:id="successRollHitAC" layoutX="11.0" layoutY="322.0" mnemonicParsing="false" selected="true" text="AC Value">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="successRollHitToggleGroup" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <RadioButton fx:id="successRollHitComp" layoutX="11.0" layoutY="352.0" mnemonicParsing="false" text="Competitive Roll" toggleGroup="$successRollHitToggleGroup" />
+                                    <AnchorPane fx:id="compRollPane" layoutX="7.0" layoutY="376.0" prefHeight="459.0" prefWidth="200.0" visible="false">
+                                       <children>
+                                          <Label text="Competing Rolls" />
+                                          <CheckBox fx:id="counterRule" layoutX="8.0" layoutY="25.0" mnemonicParsing="false" text="Allow Counter Rules" />
+                                          <CheckBox fx:id="clashRules" layoutX="8.0" layoutY="57.0" mnemonicParsing="false" text="Allow Clash Rules" />
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane fx:id="acVal" layoutX="7.0" layoutY="379.0" prefHeight="452.0" prefWidth="200.0">
+                                       <children>
+                                          <Label layoutX="5.0" layoutY="-8.0" text="AC Value" />
+                                          <RadioButton fx:id="classAC" layoutX="5.0" layoutY="38.0" mnemonicParsing="false" text="Class">
+                                             <toggleGroup>
+                                                <ToggleGroup fx:id="acDetermine" />
+                                             </toggleGroup>
+                                          </RadioButton>
+                                          <Label layoutX="5.0" layoutY="14.0" text="AC is determined by: " />
+                                          <RadioButton layoutX="5.0" layoutY="63.0" mnemonicParsing="false" text="Race" toggleGroup="$acDetermine" />
+                                          <RadioButton fx:id="acDice" layoutX="5.0" layoutY="88.0" mnemonicParsing="false" text="d " />
+                                          <ComboBox fx:id="acDiceBox" layoutX="37.0" layoutY="84.0" prefHeight="25.0" prefWidth="54.0" />
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="846.0" prefWidth="234.0" GridPane.columnIndex="1">
+                                 <children>
+                                    <TableView fx:id="statTable" layoutY="26.0" prefHeight="168.0" prefWidth="212.0">
+                                       <columns>
+                                          <TableColumn fx:id="statTableNameColumn" prefWidth="118.0" resizable="false" text="Stat Name" />
+                                          <TableColumn fx:id="statTableMaxVal" prefWidth="77.0" text="Max Value" />
+                                       </columns>
+                                    </TableView>
+                                    <Label layoutX="2.0" layoutY="6.0" prefHeight="20.0" prefWidth="106.0" text="Player Statistics:">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="statNameInsert" layoutX="14.0" layoutY="203.0" prefHeight="25.0" prefWidth="183.0" promptText="Stat Name" />
+                                    <TextField fx:id="statMaxVal" layoutX="14.0" layoutY="235.0" prefHeight="25.0" prefWidth="113.0" promptText="Max Value of Stat" />
+                                    <Button fx:id="addStatButton" layoutX="136.0" layoutY="235.0" mnemonicParsing="false" text="Add Stat" />
+                                    <Button fx:id="editSelectedStat" layoutX="14.0" layoutY="267.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="185.0" text="Edit Selected Stat" />
+                                    <Button fx:id="deleteSelectedStat" layoutX="14.0" layoutY="300.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="185.0" text="Delete Selected Stat" />
+                                    <Label layoutX="14.0" layoutY="334.0" prefHeight="20.0" prefWidth="95.0" text="Health Names:">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <TableView fx:id="healthNameTable" layoutY="354.0" prefHeight="95.0" prefWidth="213.0">
+                                       <columns>
+                                          <TableColumn fx:id="healthTableNameColumn" prefWidth="111.0" text="Health Names" />
+                                          <TableColumn fx:id="healthTableAbbrevColumn" prefWidth="85.0" text="Abbreviation" />
+                                       </columns>
+                                    </TableView>
+                                    <TextField fx:id="healthName" layoutX="14.0" layoutY="457.0" prefHeight="25.0" prefWidth="186.0" promptText="Name for Health" />
+                                    <TextField fx:id="healthAbbr" layoutX="14.0" layoutY="489.0" prefHeight="25.0" prefWidth="102.0" promptText="Abbreviation" />
+                                    <Button fx:id="AddHealth" layoutX="122.0" layoutY="489.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="78.0" text="Add Health" />
+                                    <Button fx:id="editHealthButton" layoutX="14.0" layoutY="522.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="190.0" text="Edit Selected Name" />
+                                    <Button fx:id="deleteSelectedName" layoutX="14.0" layoutY="554.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="190.0" text="Delete Selected Name" />
+                                    <Label layoutX="14.0" layoutY="587.0" text="Mana Names:">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <TableView fx:id="manaNamesTable" layoutX="1.0" layoutY="607.0" prefHeight="105.0" prefWidth="212.0">
+                                      <columns>
+                                        <TableColumn fx:id="ManaTableNameCol" prefWidth="114.0" resizable="false" text="Mana Names" />
+                                        <TableColumn fx:id="manaAbbCol" prefWidth="83.0" resizable="false" text="Abbreviation" />
+                                      </columns>
+                                    </TableView>
+                                    <TextField fx:id="manaName" layoutX="13.0" layoutY="719.0" prefHeight="25.0" prefWidth="182.0" promptText="Name for Mana" />
+                                    <TextField fx:id="manaAbbr" layoutX="14.0" layoutY="750.0" prefHeight="25.0" prefWidth="102.0" promptText="Abbreviation" />
+                                    <Button fx:id="addMana" layoutX="121.0" layoutY="750.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="74.0" text="Add Mana" />
+                                    <Button fx:id="manaEditSelected" layoutX="13.0" layoutY="783.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="181.0" text="Edit Selected Name" />
+                                    <Button fx:id="deleteSelectedMana" layoutX="13.0" layoutY="808.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="181.0" text="Delete Selected Name" AnchorPane.topAnchor="813.0" />
+                                 </children></AnchorPane>
+                           </children>
+                        </GridPane>
+                     </left>
+                     <center>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <center>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Label layoutX="14.0" layoutY="14.0" text="Duel Enditng Rules">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="14.0" layoutY="41.0" text="When health reaches: " />
+                                    <TextField fx:id="healthValDropsTo" layoutX="131.0" layoutY="37.0" />
+                                    <CheckBox fx:id="passiveLossCheck" layoutX="14.0" layoutY="72.0" mnemonicParsing="false" text="Allow passive loss" />
+                                    <CheckBox fx:id="allowForfefitLoss" layoutX="14.0" layoutY="108.0" mnemonicParsing="false" text="Allow forefit loss" />
+                                    <CheckBox fx:id="allowStallingLoss" layoutX="14.0" layoutY="140.0" mnemonicParsing="false" text="Allow stalling loss" />
+                                 </children>
+                              </AnchorPane>
+                           </center>
+                           <top>
+                              <AnchorPane prefHeight="580.0" prefWidth="475.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Label layoutX="14.0" layoutY="14.0" text="Spells">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <ListView fx:id="listSpellsAbiilities" layoutX="14.0" layoutY="34.0" prefHeight="200.0" prefWidth="437.0" />
+                                    <ComboBox fx:id="typeSpellAbility" layoutX="14.0" layoutY="244.0" prefWidth="150.0" />
+                                    <Button fx:id="addSpellAbility" layoutX="47.0" layoutY="531.0" mnemonicParsing="false" text="Add Spell/Abilitiy" />
+                                    <Button fx:id="editSpellAbility" layoutX="181.0" layoutY="531.0" mnemonicParsing="false" text="Edit Spell/Ability" />
+                                    <Button fx:id="deleteSpellAbility" layoutX="312.0" layoutY="531.0" mnemonicParsing="false" text="Delete Spell/Ability" />
+                                    <AnchorPane layoutX="14.0" layoutY="275.0" prefHeight="241.0" prefWidth="453.0" visible="false" />
+                                    <AnchorPane layoutX="14.0" layoutY="275.0" prefHeight="241.0" prefWidth="453.0" />
+                                    <AnchorPane fx:id="buffdebuff" layoutX="14.0" layoutY="275.0" prefHeight="241.0" prefWidth="453.0" visible="false">
+                                       <children>
+                                          <Label layoutX="3.0" layoutY="9.0" text="The " />
+                                          <ChoiceBox fx:id="buffdebuffplayene" layoutX="26.0" layoutY="5.0" prefWidth="150.0" />
+                                          <Label layoutX="176.0" layoutY="9.0" text=" gains " />
+                                          <ChoiceBox fx:id="buffdebuffcondition" layoutX="211.0" layoutY="5.0" prefWidth="150.0" />
+                                          <Label layoutX="361.0" layoutY="9.0" text=" for " />
+                                          <ChoiceBox fx:id="buffdebuffturndice" layoutX="58.0" layoutY="36.0" prefHeight="25.0" prefWidth="58.0" />
+                                          <TextField fx:id="buffdebuffturnnumber" layoutX="9.0" layoutY="36.0" prefHeight="25.0" prefWidth="35.0" />
+                                          <Label layoutX="44.0" layoutY="40.0" text=" d " />
+                                          <Label layoutX="116.0" layoutY="40.0" text=" turns." />
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </AnchorPane>
+                           </top>
+                        </BorderPane>
+                     </center>
+                  </BorderPane>
+               </content>
+          </Tab>
+            <Tab text="Abilities">
+               <content>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <top>
+                        <AnchorPane prefHeight="550.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <ListView fx:id="abilityList" layoutX="33.0" layoutY="29.0" prefHeight="462.0" prefWidth="840.0" />
+                              <Button fx:id="addAbility" layoutX="179.0" layoutY="504.0" mnemonicParsing="false" text="Add Ability" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="504.0" />
+                              <Button fx:id="editAbility" layoutX="414.0" layoutY="504.0" mnemonicParsing="false" text="Edit Ability" AnchorPane.topAnchor="504.0" />
+                              <Button fx:id="delAbility" layoutX="595.0" layoutY="504.0" mnemonicParsing="false" text="Delete Ability" AnchorPane.rightAnchor="290.0" AnchorPane.topAnchor="504.0" />
+                           </children>
+                        </AnchorPane>
+                     </top>
+                     <center>
+                        <AnchorPane prefHeight="319.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <TextField fx:id="abilityName" layoutX="14.0" layoutY="14.0" promptText="Ability Name" />
+                              <RadioButton fx:id="abilityEffectSpell" layoutX="25.0" layoutY="62.0" mnemonicParsing="false" text="Spell">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="abilitySpellToggleGroup" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton fx:id="abilitySummonSelect" layoutX="102.0" layoutY="62.0" mnemonicParsing="false" text="Summon" toggleGroup="$abilitySpellToggleGroup" />
+                              <RadioButton fx:id="spellBuffsSelect" layoutX="199.0" layoutY="62.0" mnemonicParsing="false" text="Buff" toggleGroup="$abilitySpellToggleGroup" />
+                              <RadioButton fx:id="abilitySpecialSelect" layoutX="274.0" layoutY="62.0" mnemonicParsing="false" text="Special" toggleGroup="$abilitySpellToggleGroup" />
+                           </children>
+                        </AnchorPane>
+                     </center>
+                  </BorderPane>
+               </content>
+            </Tab>
+            <Tab closable="false" text="Race Information">
+               <content>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <left>
+                        <AnchorPane prefHeight="846.0" prefWidth="407.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <ListView fx:id="raceList" layoutX="14.0" layoutY="14.0" prefHeight="768.0" prefWidth="381.0" />
+                              <Button fx:id="editRace" layoutX="179.0" layoutY="800.0" mnemonicParsing="false" text="Edit Race" />
+                              <Button fx:id="addRace" layoutX="96.0" layoutY="800.0" mnemonicParsing="false" text="Add Race" />
+                              <Button fx:id="delRace" layoutX="261.0" layoutY="800.0" mnemonicParsing="false" text="Delete Race" />
+                           </children>
+                        </AnchorPane>
+                     </left>
+                     <right>
+                        <AnchorPane prefHeight="846.0" prefWidth="485.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label layoutX="14.0" layoutY="14.0" text="Race Name:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="raceName" layoutX="98.0" layoutY="12.0" />
+                              <TableView fx:id="HPMPchart" layoutX="14.0" layoutY="61.0" prefHeight="96.0" prefWidth="317.0">
+                                <columns>
+                                  <TableColumn fx:id="addSetSubHPMPCoil" prefWidth="120.0" resizable="false" text="Set/Add/Subtract" />
+                                  <TableColumn fx:id="colHPMP" prefWidth="110.0" resizable="false" text="Health or Mana" />
+                                    <TableColumn fx:id="dataValHPMP" prefWidth="72.0" resizable="false" text="Value" />
+                                </columns>
+                              </TableView>
+                              <Label layoutX="14.0" layoutY="37.0" text="Health and Mana:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <ComboBox fx:id="setAddSubHPMPdrop" layoutX="344.0" layoutY="61.0" prefHeight="25.0" prefWidth="120.0" />
+                              <ComboBox fx:id="HPMPdrop" layoutX="343.0" layoutY="97.0" prefHeight="25.0" prefWidth="120.0" />
+                              <TextField fx:id="valHPMP" layoutX="343.0" layoutY="132.0" prefHeight="25.0" prefWidth="120.0" promptText="Value" />
+                              <Button fx:id="addHPMP" layoutX="14.0" layoutY="157.0" mnemonicParsing="false" text="+" AnchorPane.leftAnchor="14.0" />
+                              <Button fx:id="editHPMP" layoutX="39.0" layoutY="157.0" mnemonicParsing="false" text="E" AnchorPane.leftAnchor="39.0" />
+                              <Button fx:id="removeHPMP" layoutX="62.0" layoutY="157.0" mnemonicParsing="false" text="-" AnchorPane.leftAnchor="62.0" />
+                              <Label layoutX="14.0" layoutY="195.0" text="Stats:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <TableView fx:id="statTableRace" layoutX="14.0" layoutY="215.0" prefHeight="98.0" prefWidth="318.0">
+                                <columns>
+                                  <TableColumn fx:id="addSetSubStatCol" prefWidth="122.0" resizable="false" text="Set/Add/Subtract" />
+                                  <TableColumn fx:id="statCol" prefWidth="98.0" resizable="false" text="Stat" />
+                                    <TableColumn fx:id="valStatRaceCol" prefWidth="82.0" resizable="false" text="Value" />
+                                </columns>
+                              </TableView>
+                              <ChoiceBox fx:id="addSetSubStatDrop" layoutX="344.0" layoutY="215.0" prefHeight="25.0" prefWidth="120.0" />
+                              <ChoiceBox fx:id="statSelectDrop" layoutX="343.0" layoutY="252.0" prefHeight="25.0" prefWidth="120.0" />
+                              <TextField fx:id="statValSet" layoutX="343.0" layoutY="288.0" prefHeight="25.0" prefWidth="120.0" promptText="Value" />
+                              <Button fx:id="addStat" layoutX="13.0" layoutY="313.0" mnemonicParsing="false" text="+" AnchorPane.leftAnchor="14.0" />
+                              <Button fx:id="editStat" layoutX="37.0" layoutY="313.0" mnemonicParsing="false" text="E" AnchorPane.leftAnchor="39.0" />
+                              <Button fx:id="removeStat" layoutX="59.0" layoutY="313.0" mnemonicParsing="false" text="-" AnchorPane.leftAnchor="62.0" />
+                              <Label layoutX="14.0" layoutY="349.0" text="Weaknesses and Strengths:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <TableView fx:id="weakStrenRaceTable" layoutX="13.0" layoutY="369.0" prefHeight="143.0" prefWidth="226.0">
+                                <columns>
+                                  <TableColumn fx:id="weakStrenRaceCol" prefWidth="132.0" resizable="false" text="Weakness/Strength" />
+                                  <TableColumn fx:id="condRaceCol" prefWidth="79.0" resizable="false" text="Condition" />
+                                </columns>
+                              </TableView>
+                              <ChoiceBox fx:id="weakStrenDropDownRace" layoutX="247.0" layoutY="369.0" prefHeight="25.0" prefWidth="225.0" />
+                              <ChoiceBox fx:id="condDDRace" layoutX="247.0" layoutY="411.0" prefHeight="25.0" prefWidth="225.0" />
+                              <Button fx:id="addStrenWeakRace" layoutX="247.0" layoutY="450.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="225.0" text="Add Strength/Weakness" />
+                              <Button fx:id="rmStrenWeakRace" layoutX="247.0" layoutY="484.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="225.0" text="Remove Strength/Weakness" />
+                              <Label layoutX="17.0" layoutY="529.0" text="Abilites:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <ChoiceBox fx:id="abilitiesList" layoutX="13.0" layoutY="549.0" prefWidth="150.0" />
+                              <Button fx:id="addAbilityRace" layoutX="173.0" layoutY="549.0" mnemonicParsing="false" text="+" />
+                              <Button fx:id="editAbilityRace" layoutX="198.0" layoutY="549.0" mnemonicParsing="false" text="E" />
+                              <Button fx:id="rmAbilityRace" layoutX="221.0" layoutY="549.0" mnemonicParsing="false" text="-" />
+                              <ListView fx:id="abilityListView" layoutX="13.0" layoutY="580.0" prefHeight="200.0" prefWidth="463.0" />
+                           </children>
+                        </AnchorPane>
+                     </right>
+                  </BorderPane>
+               </content>
+            </Tab>
+            <Tab closable="false" text="Class Information">
+               <content>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <left>
+                        <AnchorPane prefHeight="846.0" prefWidth="413.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <ListView fx:id="classList" layoutX="14.0" layoutY="14.0" prefHeight="768.0" prefWidth="384.0" />
+                              <Button fx:id="addClass" layoutX="84.0" layoutY="790.0" mnemonicParsing="false" text="Add Class" />
+                              <Button fx:id="editClass" layoutX="186.0" layoutY="790.0" mnemonicParsing="false" text="Edit Class" />
+                              <Button fx:id="delClass" layoutX="286.0" layoutY="790.0" mnemonicParsing="false" text="Delete Class" />
+                           </children>
+                        </AnchorPane>
+                     </left>
+                     <center>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label layoutX="14.0" layoutY="14.0" text="Class Name:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="className" layoutX="95.0" layoutY="12.0" />
+                              <TableView fx:id="classHPMPTable" layoutX="11.0" layoutY="60.0" prefHeight="101.0" prefWidth="309.0">
+                                <columns>
+                                  <TableColumn fx:id="classSetAddSubHPMPCol" prefWidth="110.0" resizable="false" text="Set/Add/Subtract" />
+                                  <TableColumn fx:id="classHPMPCol" prefWidth="110.0" resizable="false" text="Health or Mana" />
+                                    <TableColumn fx:id="classHPMPClassCol" prefWidth="72.0" resizable="false" text="Value" />
+                                </columns>
+                              </TableView>
+                              <Label layoutX="14.0" layoutY="44.0" text="Health and Mana:" AnchorPane.leftAnchor="10.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <ComboBox fx:id="classSetHPMPDropdown" layoutX="334.0" layoutY="60.0" prefHeight="25.0" prefWidth="120.0" />
+                              <ChoiceBox fx:id="classHPMPDropdown" layoutX="334.0" layoutY="98.0" prefHeight="25.0" prefWidth="120.0" />
+                              <TextField fx:id="classValTF" layoutX="334.0" layoutY="136.0" prefHeight="25.0" prefWidth="120.0" promptText="Value" />
+                              <Label layoutX="11.0" layoutY="205.0" text="Stats:" AnchorPane.leftAnchor="10.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <TableView fx:id="classStatsTable" layoutX="11.0" layoutY="225.0" prefHeight="101.0" prefWidth="317.0">
+                                <columns>
+                                  <TableColumn fx:id="classStatsAddSubSetCol" prefWidth="122.0" resizable="false" text="Set/Add/Subtract" />
+                                  <TableColumn prefWidth="98.0" text="Stat" />
+                                    <TableColumn fx:id="classValStatCol" minWidth="8.0" prefWidth="82.0" resizable="false" text="Value" />
+                                </columns>
+                              </TableView>
+                              <Button fx:id="addHPMPClass" layoutX="11.0" layoutY="161.0" mnemonicParsing="false" text="+" AnchorPane.leftAnchor="11.0" />
+                              <Button fx:id="editHPMPClass" layoutX="34.0" layoutY="161.0" mnemonicParsing="false" text="E" AnchorPane.leftAnchor="36.0" />
+                              <Button fx:id="delHPMPCLass" layoutX="59.0" layoutY="161.0" mnemonicParsing="false" text="-" AnchorPane.leftAnchor="59.0" />
+                              <ChoiceBox fx:id="classStatADSSDD" layoutX="334.0" layoutY="225.0" prefWidth="120.0" />
+                              <ChoiceBox fx:id="classStatDD" layoutX="334.0" layoutY="263.0" prefWidth="120.0" />
+                              <TextField fx:id="classStatsVal" layoutX="334.0" layoutY="301.0" prefWidth="120.0" promptText="Value" />
+                              <Button fx:id="addStatClass" layoutX="10.0" layoutY="326.0" mnemonicParsing="false" text="+" AnchorPane.leftAnchor="11.0" />
+                              <Button fx:id="editClassVal" layoutX="34.0" layoutY="326.0" mnemonicParsing="false" text="E" AnchorPane.leftAnchor="36.0" />
+                              <Button fx:id="delStatClass" layoutX="56.0" layoutY="326.0" mnemonicParsing="false" text="-" AnchorPane.leftAnchor="59.0" />
+                              <Label layoutX="10.0" layoutY="372.0" text="Starting Spells: " AnchorPane.leftAnchor="10.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <ListView fx:id="spellList" layoutX="9.0" layoutY="392.0" prefHeight="115.0" prefWidth="319.0" />
+                              <ChoiceBox fx:id="spellChooser" layoutX="334.0" layoutY="404.0" prefWidth="120.0" />
+                              <Button fx:id="addSSpell" layoutX="334.0" layoutY="437.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Add Spell" />
+                              <Button fx:id="deleteSSpell" layoutX="334.0" layoutY="470.0" mnemonicParsing="false" prefWidth="120.0" text="Delete Spell" />
+                              <Label layoutX="7.0" layoutY="523.0" text="Level List:" AnchorPane.leftAnchor="10.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <ListView fx:id="levelListSet" layoutX="9.0" layoutY="550.0" prefHeight="200.0" prefWidth="457.0" />
+                              <RadioButton fx:id="tierList" layoutX="83.0" layoutY="525.0" mnemonicParsing="false" text="By Tier">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="byLvlTierToggleGroup" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton fx:id="byLevel" layoutX="166.0" layoutY="525.0" mnemonicParsing="false" text="By Level" toggleGroup="$byLvlTierToggleGroup" />
+                              <Button fx:id="addTierLvl" layoutX="95.0" layoutY="762.0" mnemonicParsing="false" text="Add Tier" />
+                              <Button fx:id="addAbilityClass" layoutX="207.0" layoutY="762.0" mnemonicParsing="false" text="Add Ability" />
+                              <Button fx:id="addSpellClass" layoutX="328.0" layoutY="762.0" mnemonicParsing="false" text="Add Spell" />
+                           </children>
+                        </AnchorPane>
+                     </center></BorderPane>
+               </content>
+            </Tab>
+            <Tab closable="false" text="Shop Information">
+               <content>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <top>
+                        <AnchorPane prefHeight="566.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label layoutX="14.0" layoutY="14.0" text="Currency Name: ">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="currencyName" layoutX="117.0" layoutY="12.0" />
+                              <ListView fx:id="shopItemList" layoutX="17.0" layoutY="50.0" prefHeight="464.0" prefWidth="865.0" />
+                              <Button fx:id="editItemList" layoutX="418.0" layoutY="537.0" mnemonicParsing="false" text="Edit Item" AnchorPane.topAnchor="530.0" />
+                              <Button fx:id="addItem" layoutX="328.0" layoutY="537.0" mnemonicParsing="false" text="Add Item" AnchorPane.topAnchor="530.0" />
+                              <Button fx:id="deleteItem" layoutX="507.0" layoutY="537.0" mnemonicParsing="false" text="Delete Item" AnchorPane.topAnchor="530.0" />
+                           </children>
+                        </AnchorPane>
+                     </top>
+                     <center>
+                        <AnchorPane prefHeight="273.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <ComboBox fx:id="itemType" layoutX="14.0" layoutY="14.0" prefWidth="150.0" />
+                              <TextArea fx:id="itemDesc" layoutX="553.0" layoutY="40.0" prefHeight="200.0" prefWidth="307.0" wrapText="true" />
+                              <Label layoutX="553.0" layoutY="18.0" text="Item Description:">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </center>
+                  </BorderPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </center>
+</BorderPane>

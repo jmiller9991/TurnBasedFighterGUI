@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="TurnBasedBot2:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/TurnBasedBot2_jar</output-path>
+    <root id="archive" name="TurnBasedBot2.jar">
+      <element id="module-output" name="TurnBasedBot2" />
+    </root>
+  </artifact>
+</component>
